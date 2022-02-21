@@ -31,14 +31,14 @@ setwd("/Users/rasmanns/Dropbox/Lavoro/Manuscripts/2021/Nadline_festuca/analyses"
 #setwd("D:/nadline_process") 
 
 
-Metabo = read.csv("nadline_full_ms1.csv", sep = ",", h = T)
+Metabo = read.csv("./data/nadline_full_ms1.csv", sep = ",", h = T)
 
 
 ####Phylogeny ####################
 #setwd("D:/Affaires Nadline/Master thesis/Statistiques/Metabolomic")
 #setwd("D:/nadline_process/festuca phylogeny/festuca phylogeny/new")
 
-tree <- read.tree("ITS_FestucaSwissIQTREE.contree")
+tree <- read.tree("./received/ITS_FestucaSwissIQTREE.contree")
 
 plot(tree)
 ### climatic niche 
@@ -47,7 +47,7 @@ setwd("D:/Affaires Nadline/Master thesis/Statistiques/Metabolomic")
 #setwd("D:/nadline_process") 
 
 
-Taxon_niche = read.csv("Taxon_Predictors_Ranges.csv", sep = ",", h = T)
+Taxon_niche = read.csv("./data/Taxon_Predictors_Ranges.csv", sep = ",", h = T)
 
 #fix(Metabo)
 
@@ -70,7 +70,7 @@ row.names(Metabo3) <- gsub(".mzXML.Peak.height", "",row.names(Metabo3)) ## area 
 #Importer tableau avec les vrais ID ------
 
 
-Rubra = read.csv("FestucaRubra_Metabo2.csv", sep = ";", h = T)
+Rubra = read.csv("./data/FestucaRubra_Metabo2.csv", sep = ";", h = T)
 
 row.names(Rubra) <- Rubra$ID_Metabo
 
