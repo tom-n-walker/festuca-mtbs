@@ -1,3 +1,7 @@
+library(parallelDist)
+library(vegan)
+library(V.PhyloMaker)
+library(ape)
 library(data.table)
 library(drake)
 library(tidyverse)
