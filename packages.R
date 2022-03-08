@@ -1,6 +1,6 @@
 library(parallelDist)
 library(vegan)
-library(V.PhyloMaker)
+library(phytools)
 library(ape)
 library(data.table)
 library(drake)

@@ -31,11 +31,13 @@ load_climate <- function(rawPlants){
     as.data.frame
   ## Format F. rubra data ----
   dataFrbClean <- dataFrb %>%
+    # change altitude to lower case
+    mutate(elevDisc = tolower(Alt)) %>%
     # select columns
     select(
       transect = Transect,
       elevCont = Altitude,
-      elevDisc = Alt,
+      elevDisc,
       lon = Longitude,
       lat = Latitude,
       vec_srad59:vec_sfroyy

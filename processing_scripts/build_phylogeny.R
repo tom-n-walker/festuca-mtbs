@@ -6,27 +6,31 @@
 #### ---------------------------------------------------------------------------
 
 build_phylogeny <- function(rawPlants){
-  ## Build species list ----
-  species <- rawPlants$cross %>%
-    select(species) %>%
-    mutate(genus = "Festuca") %>%
-    mutate(family = "Poaceae") %>%
-    distinct(species, .keep_all = T)
-  ## Build tree ----
-  tree <- phylo.maker(
-    sp.list = species, 
-    scenarios = "S3"
-  )
+  ## Load phylogeny ----
+  # load
+  rawPhylo <- read.tree("./data/ITS_FestucaSwissIQTREE.contree")
+  # replace underscores in species names
+  rawPhylo$tip.label <- gsub("_", " ", rawPhylo$tip.label)
+  ## Organise species ----
+  # extract species lists
+  phyloSpecies <- rawPhylo$tip.label
+  studySpecies <- unique(rawPlants$cross$species)
+  # extract species not present in study
+  notPresent <- setdiff(phyloSpecies, studySpecies)
   ## Format tree ----
-  formatTree <- tree$scenario.3 %>%
-    # solve dichotomies/trichotomies
-    multi2di(., random = FALSE) %>%
-    # make unique node labels
-    makeNodeLabel
-  # add 0.001 to all edge lengths to eliminate zeros
-  formatTree$edge.length <- formatTree$edge.length + 0.001
-  # final formatting of labels
-  formatTree$tip.label <- gsub("_", " ", formatTree$tip.label)
+  # drop species absent from study
+  cutPhylo <- drop.tip(rawPhylo, notPresent)
+  # force ultrametric
+  ultraTree <- chronopl(
+    cutPhylo, 
+    lambda = 0.5, 
+    age.max = 10,
+    node = "root", 
+    tol = 1e-8,
+    CV = FALSE, 
+    eval.max = 500, 
+    iter.max = 500
+  )
   ## Return ----
-  return(formatTree)
+  return(ultraTree)
 }

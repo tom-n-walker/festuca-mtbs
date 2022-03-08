@@ -12,6 +12,7 @@ process_phylo <- function(rawPhylogeny){
   ## Build output ----
   output <- list(
     phyloTree = rawPhylogeny,
+    phyloDist = dist,
     phyloPCoA = pcoa
   )
   return(output)

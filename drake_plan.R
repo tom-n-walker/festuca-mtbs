@@ -76,7 +76,8 @@ collateData <- drake_plan(
     rawPlants = rawPlants,
     asvsCross = asvsCross,
     mtbsCross = mtbsCross,
-    rawClimate = rawClimate
+    rawClimate = rawClimate,
+    phylogeny = phylogeny
   )
 )
 

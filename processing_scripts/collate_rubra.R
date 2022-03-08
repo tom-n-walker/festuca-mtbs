@@ -40,11 +40,11 @@ collate_rubra <- function(rawPlants, mtbsRubra, asvsRubra, rawClimate){
     select(-plantID, -mtbsSampleID)
   ## Collate and return ----
   allOut <- list(
-    metaData = meta,
-    climate = clim,
+    meta = meta,
+    clim = clim,
     soil = soil,
-    leafTraits = leaf,
-    bigData = bigData
+    traits = leaf,
+    mvData = bigData
   )
   return(allOut)
 }
