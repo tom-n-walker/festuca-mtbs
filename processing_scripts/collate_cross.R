@@ -15,10 +15,6 @@ collate_cross <- function(rawPlants, mtbsCross, asvsCross, rawClimate, phylogeny
     select(species) %>%
     left_join(., rawClimate$cross, by = c("species" = "genusSpecies")) %>%
     select(-species, -genus, -species.y)
-  # split
-  climOnly <- select(allClim, -contains(c("Forest", "TPI", "TRI", "TWI", "Soil")))
-  soilOnly <- select(allClim, contains("Soil"))
-  landOnly <- select(allClim, contains(c("Forest", "TPI", "TRI", "TWI")))
   ## Process big data ----
   # assemble mtbs data
   allMtbs <- data.frame(
@@ -52,9 +48,7 @@ collate_cross <- function(rawPlants, mtbsCross, asvsCross, rawClimate, phylogeny
   ## Collate and return ----
   allOut <- list(
     meta = meta,
-    clim = climOnly,
-    land = landOnly,
-    soil = soilOnly,
+    clim = allClim,
     traits = leaf,
     mvData = bigData
   )

@@ -31,6 +31,9 @@ build_phylogeny <- function(rawPlants){
     eval.max = 500, 
     iter.max = 500
   )
+  # make unique node labels
+  outTree <- makeLabel(ultraTree)
+  outTree$tip.label <- gsub("_", " ", outTree$tip.label)
   ## Return ----
-  return(ultraTree)
+  return(outTree)
 }

@@ -1,5 +1,12 @@
 
 
+
+
+
+
+
+
+
 crossTest <- bind_cols(cross$metaData, cross$bigData) %>%
   select(species, mtbsPCoA1, mtbsPCoA2, mtbsRich) %>%
   group_by(species) %>%

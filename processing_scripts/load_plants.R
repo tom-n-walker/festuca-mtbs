@@ -55,12 +55,13 @@ load_plants <- function(){
     mutate(mtbsSampleID = gsub(".mzXML.Peak.height", "", mtbsSampleID)) %>%
     # calculate LDMC
     mutate(LDMC = `Dry Weight H2O (mg)`/`Fresh Weight H2O (mg)`) %>%
+    mutate(elevDisc = tolower(Elevation)) %>%
     # reorder and rename variables
     select(
       mtbsSampleID,
       plantID = PlantID,
       species = `Plant Species`,
-      elevDisc = Elevation,
+      elevDisc,
       leafCN = `Leaf_C/N`,
       SLA, LDMC
     ) %>%

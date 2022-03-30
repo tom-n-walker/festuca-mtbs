@@ -1,3 +1,4 @@
+library(raster)
 library(parallelDist)
 library(vegan)
 library(phytools)

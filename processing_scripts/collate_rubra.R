@@ -7,15 +7,18 @@
 
 collate_rubra <- function(rawPlants, mtbsRubra, asvsRubra, rawClimate){
   ## Get basic data ----
-  meta <- select(rawPlants$rubra, mtbsSampleID:elevDisc)
   soil <- select(rawPlants$rubra, soilCEC:soilP)
   leaf <- select(rawPlants$rubra, leafCN:LDMC)
   ## Process climate data ----
-  clim <- rawPlants$rubra %>%
-    select(transect, elevCont) %>%
+  allMeta <- rawPlants$rubra %>%
+    select(mtbsSampleID, plantID, transect, elevCont, elevDisc) %>%
+    # match up cross-referencing issues
+    mutate(elevDisc = tolower(elevDisc)) %>%
     mutate(elevCont = ifelse(elevCont == 490, 521.5, elevCont)) %>%
-    left_join(., rawClimate$rubra) %>%
-    select(lon:sfroyy)
+    left_join(., rawClimate$rubra)
+  # separate true meta-data from climate data
+  meta <- select(allMeta, mtbsSampleID:lon)
+  clim <- select(allMeta, ndvi:soilR)
   ## Process big data ----
   # assemble mtbs data
   allMtbs <- data.frame(
